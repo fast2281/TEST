@@ -75,8 +75,8 @@ function checkCollision() {
 
 function placeFood() {
     // Генерация случайных координат для яблока
-    const x = Math.floor(Math.random() * tileCount);
-    const y = Math.floor(Math.random() * tileCount);
+    const x = Math.floor(Math.random() * tileCount / 2) * 2;
+    const y = Math.floor(Math.random() * tileCount / 2) * 2;
     // Выбор случайного изображения для яблока
     const imageIndex = Math.floor(Math.random() * appleImagesLoaded.length);
     // Добавление яблока в массив яблок
