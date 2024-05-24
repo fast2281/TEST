@@ -49,7 +49,7 @@ function gameLoop() {
             placeFood(); // После съедания добавляем новое яблоко
         }
         drawEverything();
-        setTimeout(gameLoop, 45);
+        setTimeout(gameLoop, 50);
     }
 }
 
