@@ -42,7 +42,7 @@ function gameLoop() {
         resetGame();
         gameLoop();
     } else {
-        if (snake[0].x === apples[0].x && snake[0].y === apples[0].y) {
+        if (Math.abs(snake[0].x - apples[0].x) <= 1 && Math.abs(snake[0].y - apples[0].y) <= 1) {
             score++;
             addSnakeSegment();
             apples.shift(); // Убираем съеденное яблоко из массива яблок
