@@ -86,7 +86,6 @@ function placeFood() {
 function addSnakeSegment() {
     const lastSegment = snake[snake.length - 1];
     snake.push({ x: lastSegment.x, y: lastSegment.y });
-    snake.push({ x: lastSegment.x, y: lastSegment.y });
 }
 
 function drawEverything() {
@@ -124,7 +123,7 @@ function drawEverything() {
     ctx.fillText(`Score: ${score}`, 10, 10);
 
     // Если режим Толика включен и набрано 22 очка, отображаем картинку на заднем фоне
-    if (tolikModeEnabled && score >= 12) { ///////////////////////
+    if (tolikModeEnabled && score >= 22) { ///////////////////////
         document.body.classList.add('tolik-active');
     } else {
         document.body.classList.remove('tolik-active');
