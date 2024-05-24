@@ -120,11 +120,11 @@ function drawEverything() {
     }
 
     // Отрисовка счета
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'white';
     ctx.fillText(`Score: ${score}`, 10, 10);
 
     // Если режим Толика включен и набрано 22 очка, отображаем картинку на заднем фоне
-    if (tolikModeEnabled && score >= 12) { ///////////////////////
+    if (tolikModeEnabled && score >= 22) { ///////////////////////
         document.body.classList.add('tolik-active');
     } else {
         document.body.classList.remove('tolik-active');
