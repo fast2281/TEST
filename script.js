@@ -121,7 +121,7 @@ function drawEverything() {
 
     // Отрисовка счета
     ctx.fillStyle = 'white';
-    ctx.fillText(`Score: ${score}`, 12, 12);
+    ctx.fillText(`Score: ${score}`, 10, 10);
 
     // Если режим Толика включен и набрано 22 очка, отображаем картинку на заднем фоне
     if (tolikModeEnabled && score >= 22) { ///////////////////////
