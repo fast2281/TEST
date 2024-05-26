@@ -42,14 +42,14 @@ function gameLoop() {
         resetGame();
         gameLoop();
     } else {
-        if(Math.abs(snake[0].x - apples[0].x) <= 1 && Math.abs(snake[0].y - apples[0].y) <= 1) {
+        if (Math.abs(snake[0].x - apples[0].x) <= 1 && Math.abs(snake[0].y - apples[0].y) <= 1) {
             score++;
             addSnakeSegment();
             apples.shift(); // Убираем съеденное яблоко из массива яблок
             placeFood(); // После съедания добавляем новое яблоко
         }
         drawEverything();
-        setTimeout(gameLoop, 80-score);
+        setTimeout(gameLoop, 80 - score);
     }
 }
 
@@ -123,7 +123,7 @@ function drawEverything() {
     ctx.fillText(`Score: ${score}`, 10, 10);
 
     // Если режим Толика включен и набрано 22 очка, отображаем картинку на заднем фоне
-    if (tolikModeEnabled && score >= 22) { ///////////////////////
+    if (tolikModeEnabled && score >= 22) {
         document.body.classList.add('tolik-active');
     } else {
         document.body.classList.remove('tolik-active');
@@ -171,5 +171,31 @@ document.addEventListener('keydown', event => {
     }
 });
 
+// Функции для показа и скрытия различных страниц
+function showStartPage() {
+    document.getElementById('startPage').classList.remove('hidden');
+    document.getElementById('levelPage').classList.add('hidden');
+    document.getElementById('gamePage').classList.add('hidden');
+}
+
+function showLevels() {
+    document.getElementById('startPage').classList.add('hidden');
+    document.getElementById('levelPage').classList.remove('hidden');
+    document.getElementById('gamePage').classList.add('hidden');
+}
+
+function startLevel(level) {
+    // Проверка, что уровень не заблокирован
+    if (document.querySelector(`.levelButton:nth-child(${level + 1})`).classList.contains('locked')) {
+        return;
+    }
+    resetGame();
+    document.getElementById('startPage').classList.add('hidden');
+    document.getElementById('levelPage').classList.add('hidden');
+    document.getElementById('gamePage').classList.remove('hidden');
+    gameLoop();
+}
+
+// Инициализация начального состояния
 resetGame();
-gameLoop();
+showStartPage();
