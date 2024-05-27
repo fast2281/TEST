@@ -38,7 +38,7 @@ canvas {
 }
 
 body.tolik-active {
-    background-image: url('../img/z.png');
+    background-image: url('../img/z.gif');
     background-size: cover;
     background-position: center;
 }

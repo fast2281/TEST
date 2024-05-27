@@ -1,3 +1,9 @@
+export function toggleTolikMode() {
+    tolikModeEnabled = !tolikModeEnabled;
+    const button = document.getElementById('tolikModeButton');
+    button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
+}
+
 import { EventListener, direction, resetDirection, pause } from "./controls.js";
 
 const canvas = document.getElementById('gameCanvas');
@@ -86,8 +92,8 @@ function checkCollision() {
 }
 
 function placeFood() {
-    const x = Math.floor(Math.random() * tileCount / 2) * 2;
-    const y = Math.floor(Math.random() * tileCount / 2) * 2;
+    const x = 10;
+    const y = 10;
     const imageIndex = Math.floor(Math.random() * appleImagesLoaded.length);
     apples.push({ x, y, imageIndex });
 }
@@ -146,7 +152,7 @@ function resetGame() {
     apples = [];
     placeFood();
     document.body.classList.remove('tolik-active');
-    snakeSpeed = 100;
+    snakeSpeed = 200;
     clearTimeout(gameLoopTimeout);
 }
 
@@ -154,11 +160,6 @@ function increaseSpeed() {
     snakeSpeed = Math.max(20, snakeSpeed - 2); // Уменьшаем интервал на 2 мс, минимальная скорость - 20 мс
 }
 
-function toggleTolikMode() {
-    tolikModeEnabled = !tolikModeEnabled;
-    const button = document.getElementById('tolikModeButton');
-    button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
-}
 
 document.addEventListener("keydown", EventListener);
 
