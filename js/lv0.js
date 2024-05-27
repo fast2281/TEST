@@ -1,3 +1,5 @@
+import { EventListener, direction, resetDirection, pause } from "./controls.js";
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -6,12 +8,10 @@ const tileCount = canvas.width / gridSize;
 
 const snakeHeadImage = new Image();
 snakeHeadImage.src = 'img/z1.jpg';
-
-const snakeTailImage = new Image();
-snakeHeadImage.src = 'img/z2.jpg';
-
 const snakeBodyImage = new Image();
 snakeBodyImage.src = 'img/z3.jpg';
+const snakeTailImage = new Image();
+snakeTailImage.src = 'img/z2.jpg';
 
 const appleImages = [
     'img/ap.png',
@@ -32,21 +32,19 @@ appleImages.forEach(src => {
 });
 
 let snake = [];
-let direction = {};
 let score = 0;
 let tolikModeEnabled = true;
-let snakeSpeed = 100;
-let gameLoopTimeout;
-let pause = false;
+let snakeSpeed;
+export let gameLoopTimeout;
 
-function gameLoop() {
-    if (pause) return;
+export function gameLoop() {
+    if (pause) return;    
     moveSnake();
     if (checkCollision()) {
         resetGame();
         gameLoop();
     } else {
-        if (snake[0].x === apples[0].x && snake[0].y === apples[0].y) {
+        if (checkApples()) {
             score++;
             addSnakeSegment();
             apples.shift();
@@ -64,6 +62,15 @@ function moveSnake() {
     }
     snake[0].x += direction.x * 2;
     snake[0].y += direction.y * 2;
+}
+
+function checkApples() {
+    for (let i = 0; i < snake.length; i++) {
+        if (snake[i].x === apples[0].x && snake[i].y === apples[0].y) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function checkCollision() {
@@ -110,7 +117,7 @@ function drawEverything() {
             imageToDraw = snakeHeadImage;
         }
         else if (i === snake.length - 1) {
-            imageToDraw = snakeHeadImage;
+            imageToDraw = snakeTailImage;
         }
         ctx.drawImage(
             imageToDraw,
@@ -133,7 +140,7 @@ function drawEverything() {
 
 function resetGame() {
     snake = [{ x: Math.floor((Math.random() * tileCount) / 2) * 2, y: Math.floor((Math.random() * tileCount) / 2) * 2 }];
-    direction = { x: 0, y: 0 };
+    resetDirection();
     score = 0;
     apples = [];
     placeFood();
@@ -152,46 +159,7 @@ function toggleTolikMode() {
     button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
 }
 
-document.addEventListener('keydown', event => {
-    switch (event.key) {
-        case "ArrowUp":
-        case "w":
-        case "W":
-        case "ц":
-        case "Ц":
-            if (direction.y === 0) direction = { x: 0, y: -1 };
-            break;
-        case "ArrowDown":
-        case "s":
-        case "S":
-        case "ы":
-        case "Ы":
-            if (direction.y === 0) direction = { x: 0, y: 1 };
-            break;
-        case "ArrowLeft":
-        case "a":
-        case "A":
-        case "ф":
-        case "Ф":
-            if (direction.x === 0) direction = { x: -1, y: 0 };
-            break;
-        case "ArrowRight":
-        case "d":
-        case "D":
-        case "в":
-        case "В":
-            if (direction.x === 0) direction = { x: 1, y: 0 };
-            break;
-        case " ":
-            pause = !pause;
-            if (!pause) {
-                gameLoop();
-            } else {
-                clearInterval(gameInterval);
-            }
-            break;
-    }
-});
+document.addEventListener("keydown", EventListener);
 
 resetGame();
 gameLoop();

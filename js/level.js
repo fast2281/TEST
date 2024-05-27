@@ -39,26 +39,19 @@ let snakeSpeed = 150;
 let gameLoopTimeout;
 let pause = false;
 
-const maxObstacles = 20; // Максимальное число препятствий
-let obstacles = [];
-
 function gameLoop() {
+    if (pause) return;
     moveSnake();
     if (checkCollision()) {
         resetGame();
+        gameLoop();
     } else {
-        if (apples.length > 0 && Math.abs(snake[0].x - apples[0].x) <= 1 && Math.abs(snake[0].y - apples[0].y) <= 1) {
+        if (snake[0].x === apples[0].x && snake[0].y === apples[0].y) {
             score++;
             addSnakeSegment();
             apples.shift();
             placeFood();
             increaseSpeed();
-            // Создаем 3 препятствия за каждое съеденное яблоко
-            for (let i = 0; i < 3; i++) {
-                if (obstacles.length < maxObstacles) {
-                    placeObstacle();
-                }
-            }
         }
         drawEverything();
         gameLoopTimeout = setTimeout(gameLoop, snakeSpeed);
@@ -69,8 +62,8 @@ function moveSnake() {
     for (let i = snake.length - 1; i > 0; i--) {
         snake[i] = { ...snake[i - 1] };
     }
-    snake[0].x += direction.x;
-    snake[0].y += direction.y;
+    snake[0].x += direction.x * 2;
+    snake[0].y += direction.y * 2;
 }
 
 function checkCollision() {
@@ -79,17 +72,6 @@ function checkCollision() {
     }
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
-            return true;
-        }
-    }
-    for (let i = 0; i < obstacles.length; i++) {
-        if (snake[0].x === obstacles[i].x && snake[0].y === obstacles[i].y) {
-            return true;
-        }
-    }
-    // Проверяем столкновение с яблоком
-    for (let i = 0; i < apples.length; i++) {
-        if (snake[0].x === apples[i].x && snake[0].y === apples[i].y) {
             return true;
         }
     }
@@ -103,15 +85,6 @@ function placeFood() {
     apples.push({ x, y, imageIndex });
 }
 
-function placeObstacle() {
-    const x = Math.floor(Math.random() * tileCount);
-    const y = Math.floor(Math.random() * tileCount);
-    const obstacleImage = new Image();
-    // Задаем текстуру для препятствия
-    obstacleImage.src = 'img/k1.png'; // Замените путь на путь к вашей текстуре
-    obstacles.push({ x, y, obstacleImage });
-}
-
 function addSnakeSegment() {
     const lastSegment = snake[snake.length - 1];
     snake.push({ x: lastSegment.x, y: lastSegment.y });
@@ -120,7 +93,6 @@ function addSnakeSegment() {
 function drawEverything() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Отрисовка яблок
     apples.forEach(apple => {
         ctx.drawImage(
             appleImagesLoaded[apple.imageIndex],
@@ -131,23 +103,13 @@ function drawEverything() {
         );
     });
 
-    // Отрисовка препятствий
-    obstacles.forEach(obstacle => {
-        // Используем текстуру для препятствия
-        ctx.drawImage(
-            obstacle.obstacleImage,
-            obstacle.x * 20,
-            obstacle.y * 20,
-            gridSize * 2,
-            gridSize * 2  // Удваиваем высоту, чтобы препятствие было размером 1 на 2 клетки
-        );
-    });
-
-    // Отрисовка змейки
     for (let i = 0; i < snake.length; i++) {
         const segment = snake[i];
         let imageToDraw = snakeBodyImage;
         if (i === 0) {
+            imageToDraw = snakeHeadImage;
+        }
+        else if (i === snake.length - 1) {
             imageToDraw = snakeHeadImage;
         }
         ctx.drawImage(
@@ -159,11 +121,9 @@ function drawEverything() {
         );
     }
 
-    // Отрисовка счета
     ctx.fillStyle = 'white';
     ctx.fillText(`Score: ${score}`, 10, 10);
 
-    // Включение режима Толика при достижении 22 очков
     if (tolikModeEnabled && score >= 22) {
         document.body.classList.add('tolik-active');
     } else {
@@ -171,53 +131,64 @@ function drawEverything() {
     }
 }
 
-// Сброс игры
 function resetGame() {
-    snake = [{ x: 10, y: 10 }];
+    snake = [{ x: Math.floor((Math.random() * tileCount) / 2) * 2, y: Math.floor((Math.random() * tileCount) / 2) * 2 }];
     direction = { x: 0, y: 0 };
     score = 0;
     apples = [];
-    obstacles = []; // Сбрасываем препятствия
-    placeFood(); // Размещаем новое яблоко
+    placeFood();
     document.body.classList.remove('tolik-active');
-    snakeSpeed = 80;
+    snakeSpeed = 100;
     clearTimeout(gameLoopTimeout);
 }
 
-// Увеличение скорости игры
 function increaseSpeed() {
     snakeSpeed = Math.max(20, snakeSpeed - 2); // Уменьшаем интервал на 2 мс, минимальная скорость - 20 мс
 }
 
-// Переключение режима Толика
 function toggleTolikMode() {
     tolikModeEnabled = !tolikModeEnabled;
     const button = document.getElementById('tolikModeButton');
     button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
 }
 
-// Обработчик клавиш
 document.addEventListener('keydown', event => {
     switch (event.key) {
-        case 'ArrowUp':
-        case 'w':
-        case 'W':
+        case "ArrowUp":
+        case "w":
+        case "W":
+        case "ц":
+        case "Ц":
             if (direction.y === 0) direction = { x: 0, y: -1 };
             break;
-        case 'ArrowDown':
-        case 's':
-        case 'S':
+        case "ArrowDown":
+        case "s":
+        case "S":
+        case "ы":
+        case "Ы":
             if (direction.y === 0) direction = { x: 0, y: 1 };
             break;
-        case 'ArrowLeft':
-        case 'a':
-        case 'A':
+        case "ArrowLeft":
+        case "a":
+        case "A":
+        case "ф":
+        case "Ф":
             if (direction.x === 0) direction = { x: -1, y: 0 };
             break;
-        case 'ArrowRight':
-        case 'd':
-        case 'D':
+        case "ArrowRight":
+        case "d":
+        case "D":
+        case "в":
+        case "В":
             if (direction.x === 0) direction = { x: 1, y: 0 };
+            break;
+        case " ":
+            pause = !pause;
+            if (!pause) {
+                gameLoop();
+            } else {
+                clearInterval(gameInterval);
+            }
             break;
     }
 });
