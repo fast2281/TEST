@@ -112,13 +112,14 @@ function drawEverything() {
 
     for (let i = 0; i < snake.length; i++) {
         const segment = snake[i];
-        let imageToDraw = snakeBodyImage;
+        let imageToDraw;
         if (i === 0) {
             imageToDraw = snakeHeadImage;
         }
         else if (i === snake.length - 1) {
             imageToDraw = snakeTailImage;
         }
+        else imageToDraw = snakeBodyImage;
         ctx.drawImage(
             imageToDraw,
             segment.x * 20,
