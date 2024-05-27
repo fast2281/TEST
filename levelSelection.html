@@ -4,83 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор уровня</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-
-        #levelPage {
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        #levels {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .levelButton {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #fff; /* Изменение цвета фона кнопок на белый */
-            color: #000; /* Изменение цвета текста кнопок на черный */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .levelButton:hover {
-            background-color: #979c97;
-            color: #fff;
-        }
-
-        .levelButton:active {
-            background-color: #979c97;
-        }
-
-        .levelButton.locked {
-            background-color: #333;
-            color: #888;
-            cursor: not-allowed;
-        }
-
-        #backButton {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #fff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        #backButton:hover {
-            background-color: #979c97;
-            color: #fff;
-        }
-
-        #backButton:active {
-            background-color: #979c97;
-        }
-    </style>
+    <link rel="stylesheet" href="css/levelSelection.css">
 </head>
 <body>
     <div id="levelPage">
@@ -96,19 +20,6 @@
         <button id="backButton" onclick="goBack()">Назад</button>
     </div>
 
-    <script>
-        function startLevel(level) {
-            if (level === 0) {
-                window.location.href = 'lvl0.html';
-            } else if (level === 1) {
-                window.location.href = 'lvl1.html';
-            }
-            // Добавьте здесь обработку открытия остальных уровней, когда они будут готовы
-        }
-
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <script src="js/levelSelection.js"></script>
 </body>
 </html>
