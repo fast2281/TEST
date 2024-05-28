@@ -86,8 +86,8 @@ function checkCollision() {
 }
 
 function placeFood() {
-    const x = 10;
-    const y = 10;
+    const x = Math.floor((Math.random() * tileCount) / 2) * 2;
+    const y = Math.floor((Math.random() * tileCount) / 2) * 2;
     const imageIndex = Math.floor(Math.random() * appleImagesLoaded.length);
     apples.push({ x, y, imageIndex });
 }
