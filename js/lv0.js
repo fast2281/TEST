@@ -44,7 +44,7 @@ let snakeSpeed;
 export let gameLoopTimeout;
 
 export function gameLoop() {
-    if (pause) return;    
+    if (pause) return;
     moveSnake();
     if (checkCollision()) {
         resetGame();
@@ -146,18 +146,20 @@ function drawEverything() {
 }
 
 function resetGame() {
-    snake = [{ x: Math.floor((Math.random() * tileCount) / 2) * 2, y: Math.floor((Math.random() * tileCount) / 2) * 2 }];
+    snake = [{
+        x: Math.floor((Math.random() * tileCount) / 2) * 2,
+        y: Math.floor((Math.random() * tileCount) / 2) * 2
+    }];
     resetDirection();
     score = 0;
     apples = [];
     placeFood();
     document.body.classList.remove('tolik-active');
     snakeSpeed = 200;
-    clearTimeout(gameLoopTimeout);
 }
 
 function increaseSpeed() {
-    snakeSpeed = Math.max(20, snakeSpeed - 2); // Уменьшаем интервал на 2 мс, минимальная скорость - 20 мс
+    snakeSpeed = Math.max(50, snakeSpeed - 2); // Уменьшаем интервал на 2 мс, минимальная скорость - 20 мс
 }
 
 
