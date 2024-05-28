@@ -1,10 +1,4 @@
-export function toggleTolikMode() {
-    tolikModeEnabled = !tolikModeEnabled;
-    const button = document.getElementById('tolikModeButton');
-    button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
-}
-
-import { EventListener, direction, resetDirection, pause } from "./controls.js";
+import { eventListener, direction, resetDirection, pause } from "./controls.js";
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -159,11 +153,16 @@ function resetGame() {
 }
 
 function increaseSpeed() {
-    snakeSpeed = Math.max(50, snakeSpeed - 2); // Уменьшаем интервал на 2 мс, минимальная скорость - 20 мс
+    snakeSpeed = Math.max(50, snakeSpeed - 2);
 }
 
+export function toggleTolikMode() {
+    tolikModeEnabled = !tolikModeEnabled;
+    const button = document.getElementById('tolikModeButton');
+    button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
+}
 
-document.addEventListener("keydown", EventListener);
+document.addEventListener("keydown", eventListener);
 
 resetGame();
 gameLoop();

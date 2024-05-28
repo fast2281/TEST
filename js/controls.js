@@ -5,7 +5,7 @@ export function resetDirection() {
     direction.x = 0;
     direction.y = 0;
 }
-function EventListener(event) {
+function eventListener(event) {
     switch (event.key) {
         case "ArrowUp":
         case "w":
@@ -60,4 +60,4 @@ function EventListener(event) {
     }
 };
 
-export { EventListener }
+export { eventListener }

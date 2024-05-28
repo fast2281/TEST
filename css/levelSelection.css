@@ -30,8 +30,8 @@ h1 {
 .levelButton {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #fff; /* Изменение цвета фона кнопок на белый */
-    color: #000; /* Изменение цвета текста кнопок на черный */
+    background-color: #fff;
+    color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;

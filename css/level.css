@@ -1,44 +1,42 @@
-
 body {
-    background-color: black;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    transition: background-image 0.5s ease-in-out;
+  background-color: black;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  transition: background-image 0.5s ease-in-out;
 }
 
 h1 {
-    color: white;
-    margin-bottom: 20px;
-    text-align: center; /* Центрирование заголовков */
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 canvas {
-    border: 4px solid #16b102;
+  border: 4px solid #16b102;
 }
 
 #tolikModeButton {
-    margin-top: 20px;
-    margin-bottom: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center; /* Центрирование текста в кнопках */
+  margin-top: 20px;
+  margin-bottom: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
 }
 
-#tolikModeButton:hover {
-    background-color: #ccc; /* Изменяем цвет при наведении */
+.button:hover {
+  background-color: #ccc;
 }
 
-#tolikModeButton:focus {
-    outline: none; /* Убираем обводку при фокусе */
+.button:focus {
+  outline: none;
 }
 
 body.tolik-active {
-    background-image: url('../img/z.gif');
-    background-size: cover;
-    background-position: center;
+  background-image: url("../img/z.gif");
+  background-size: cover;
 }

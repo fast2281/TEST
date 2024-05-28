@@ -11,9 +11,12 @@
 <body>
     <h1>Уровень 0</h1>
     <canvas id="gameCanvas" width="800" height="800"></canvas>
-    <button id="tolikModeButton" onclick="toggleTolikMode()">Режим Толика ВКЛ</button>
-    <button id="backButton" onclick="window.history.back()">Назад</button>
-    <script type="module" src="js/lv0.js"></script>
+    <button class="button" id="tolikModeButton" onclick="toggleTolikMode()">Режим Толика ВКЛ</button>
+    <button class="button" id="backButton" onclick="window.history.back()">Назад</button>
+    <script type="module">
+        import { toggleTolikMode } from './js/lv0.js';
+        window.toggleTolikMode = toggleTolikMode;
+    </script>
 </body>
 
 </html>

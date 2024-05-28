@@ -26,14 +26,17 @@ h1 {
 #startButton {
     padding: 10px 20px;
     font-size: 20px;
-    background-color: #00a500;
-    color: #000;
-    border: none;
+    background-color: black;
+    color: #fff;
+    border-color: #00a500;
+    border-width: 5px;
     border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.5s;
 }
 
 #startButton:hover {
+    color: #000;
+    font-weight: bold;
     background-color: #00a500;
 }
