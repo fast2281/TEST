@@ -55,6 +55,9 @@ function eventListener(event) {
                 clearTimeout(gameLoopTimeout);
             }
             break;
+        case "Escape":
+            history.back();
+            break;
         default:
             console.log(`Key pressed: ${event.key}`);
     }

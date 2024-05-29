@@ -149,7 +149,7 @@ function resetGame() {
     apples = [];
     placeFood();
     document.body.classList.remove('tolik-active');
-    snakeSpeed = 200;
+    snakeSpeed = 150;
 }
 
 function increaseSpeed() {

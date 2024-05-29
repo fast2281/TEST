@@ -1,3 +1,5 @@
+import { eventListener, direction, resetDirection, pause } from "./controls.js";
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -6,12 +8,10 @@ const tileCount = canvas.width / gridSize;
 
 const snakeHeadImage = new Image();
 snakeHeadImage.src = 'img/z1.jpg';
-
-const snakeTailImage = new Image();
-snakeTailImage.src = 'img/z2.jpg';
-
 const snakeBodyImage = new Image();
 snakeBodyImage.src = 'img/z3.jpg';
+const snakeTailImage = new Image();
+snakeTailImage.src = 'img/z2.jpg';
 
 const appleImages = [
     'img/ap.png',
@@ -32,12 +32,10 @@ appleImages.forEach(src => {
 });
 
 let snake = [];
-let direction = {};
 let score = 0;
 let tolikModeEnabled = true;
-let snakeSpeed = 150;
-let gameLoopTimeout;
-let pause = false;
+let snakeSpeed;
+export let gameLoopTimeout;
 
 const maxObstacles = 20; // Максимальное число препятствий
 let obstacles = [];
@@ -173,14 +171,17 @@ function drawEverything() {
 
 // Сброс игры
 function resetGame() {
-    snake = [{ x: 10, y: 10 }];
+    snake = [{
+        x: Math.floor((Math.random() * tileCount) / 2) * 2,
+        y: Math.floor((Math.random() * tileCount) / 2) * 2
+    }];
     direction = { x: 0, y: 0 };
     score = 0;
     apples = [];
     obstacles = []; // Сбрасываем препятствия
     placeFood(); // Размещаем новое яблоко
     document.body.classList.remove('tolik-active');
-    snakeSpeed = 80;
+    snakeSpeed = 150;
     clearTimeout(gameLoopTimeout);
 }
 
@@ -196,31 +197,7 @@ function toggleTolikMode() {
     button.textContent = tolikModeEnabled ? 'Режим Толика ВКЛ' : 'Режим Толика ВЫКЛ';
 }
 
-// Обработчик клавиш
-document.addEventListener('keydown', event => {
-    switch (event.key) {
-        case 'ArrowUp':
-        case 'w':
-        case 'W':
-            if (direction.y === 0) direction = { x: 0, y: -1 };
-            break;
-        case 'ArrowDown':
-        case 's':
-        case 'S':
-            if (direction.y === 0) direction = { x: 0, y: 1 };
-            break;
-        case 'ArrowLeft':
-        case 'a':
-        case 'A':
-            if (direction.x === 0) direction = { x: -1, y: 0 };
-            break;
-        case 'ArrowRight':
-        case 'd':
-        case 'D':
-            if (direction.x === 0) direction = { x: 1, y: 0 };
-            break;
-    }
-});
+document.addEventListener("keydown", eventListener);
 
 resetGame();
 gameLoop();

@@ -28,8 +28,19 @@ canvas {
   text-align: center;
 }
 
+.button {
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  background-color: black;
+  border-color: #16b102;
+  border-width: 5px;
+}
+
 .button:hover {
-  background-color: #ccc;
+  color: #000;
+  font-weight: bold;
+  background-color: #00a500;
 }
 
 .button:focus {
