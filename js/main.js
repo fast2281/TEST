@@ -1,5 +1,2 @@
 document.getElementById('startButton').addEventListener('click', function () {
-    window.location.href = 'levelSelection.html';
-document.getElementById('startButton').addEventListener('click', function () {
-    window.location.href = 'levelSelection.html';
-});
+    window.location.href = 'levelSelection.html';})
