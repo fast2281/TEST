@@ -200,3 +200,4 @@ function toggleTolikMode() {
 document.addEventListener("keydown", eventListener);
 
 resetGame();
+gameLoop();

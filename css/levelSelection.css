@@ -27,49 +27,35 @@ h1 {
     gap: 10px;
 }
 
-.levelButton {
+.button {
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #fff;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.levelButton:hover {
-    background-color: #979c97;
+    font-size: 20px;
+    background-color: black;
     color: #fff;
+    border-color: #00a500;
+    border-width: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.5s;
 }
 
-.levelButton:active {
+.button:hover {
+    color: #000;
+    font-weight: bold;
+    background-color: #00a500;
+}
+
+.button:active {
     background-color: #979c97;
 }
 
-.levelButton.locked {
-    background-color: #333;
-    color: #888;
+.button.locked {
+    border-color: red;
+    background-color: #000;
+    color: #fff;
     cursor: not-allowed;
 }
 
-#backButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #fff;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#backButton:hover {
-    background-color: #979c97;
-    color: #fff;
-}
-
-#backButton:active {
-    background-color: #979c97;
+.back {
+    margin-top: 25px;
 }

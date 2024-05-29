@@ -62,3 +62,5 @@ function eventListener(event) {
             console.log(`Key pressed: ${event.key}`);
     }
 };
+
+export { eventListener }
